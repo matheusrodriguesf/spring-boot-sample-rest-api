@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 import com.matheus.samplerestapi.base.ApiVersions;
 import com.matheus.samplerestapi.models.entity.Usuario;
 import com.matheus.samplerestapi.repositories.UsuarioRepository;
@@ -23,5 +24,10 @@ public class UsuarioRestControlller {
     public ResponseEntity<?> criarUsuario(@RequestBody Usuario usuario) {
         repository.save(usuario);
         return new ResponseEntity<>(usuario, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Usuario> recuperarUsuarios() {
+        return repository.findAll();
     }
 }
